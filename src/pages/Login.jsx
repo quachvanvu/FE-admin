@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.css";
+import "./css/Login.css";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,9 +9,13 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:1406/auth/login", {
+      const response = await axios.post("http://localhost:1406/admin/login", {
         email,
         password,
       });
@@ -28,10 +33,6 @@ const Login = () => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <div className="login">
       <div className="login-container">
@@ -39,26 +40,32 @@ const Login = () => {
         <div className="login-form">
           <input
             type="text"
-            placeholder="Your email"
+            placeholder="Email của bạn"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className="password-input-container">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Mật khẩu"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <i
-              className={`password-toggle-icon ${
-                showPassword ? "visible" : "hidden"
-              }`}
-              onClick={togglePasswordVisibility}
-            >
-              👁️
-            </i>
-          </div>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Mật khẩu"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            style={{
+              position: "absolute",
+              top: "39%",
+              right: "80px",
+
+              cursor: "pointer",
+            }}
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? (
+              <RiEyeLine size={30} color="#808080" />
+            ) : (
+              <RiEyeCloseLine size={30} color="#808080" />
+            )}
+          </span>
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button onClick={handleLogin}>Đăng nhập</button>

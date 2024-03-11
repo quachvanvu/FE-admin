@@ -1,19 +1,15 @@
-import React from 'react'
-import MainDash from "../components/MainDash/MainDash";
-import RightSide from '../components/RigtSide/RightSide';
-import Sidebar from '../components/Sidebar';
-import "./dashboard.css"
+import React from "react";
+import "./css/dashboard.css";
+import Sidebar from "../components/Sidebar";
 
 const Dashboard = () => {
   return (
-    <div className="Dashboard">
-    <div className="DashboardGlass">
-      <Sidebar/>
-      <MainDash/>
-      <RightSide/>
+    <div className="App">
+      <div className="AppGlass">
+        <Sidebar />
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
