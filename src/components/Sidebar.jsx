@@ -43,27 +43,31 @@ const Sidebar = () => {
           </span>
         </div>
 
-        <div className="menu">
-          {SidebarData.map((item, index) => {
-            return (
-              <Link
-                to={`/${item.heading.toLowerCase()}`}
-                className={selected === index ? "menuItem active" : "menuItem"}
-                key={index}
-                onClick={() => setSelected(index)}
-                style={{ textDecoration: "none" }}
-              >
-                <div>
-                  <item.icon />
-                  <span>{item.heading}</span>
-                </div>
-              </Link>
-            );
-          })}
-          {/* signoutIcon */}
-          <div className="menuItem">
-            <UilSignOutAlt />
-          </div>
+        {SidebarData.map((item, index) => {
+          return (
+            <ul className="menu">
+              <li>
+                <Link
+                  to={`/${item.heading.toLowerCase()}`}
+                  className={
+                    selected === index ? "menuItem active" : "menuItem"
+                  }
+                  key={index}
+                  onClick={() => setSelected(index)}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div>
+                    <item.icon />
+                    <span>{item.heading}</span>
+                  </div>
+                </Link>
+              </li>
+            </ul>
+          );
+        })}
+        {/* signoutIcon */}
+        <div className="menuItem">
+          <UilSignOutAlt />
         </div>
       </motion.div>
     </>

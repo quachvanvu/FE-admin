@@ -9,14 +9,9 @@ const Customer = () => {
   const [users, setUsers] = useState([]);
 
   // Function to get all users
-  const getAllUsers = async () => {
-    try {
-      const res = await axios.get("http://localhost:1406/admin/manage");
-      setUsers(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const getAllUsers = async () => {
+   
+  // };
 
   // Function to delete a user
   const deleteUser = async (userId) => {
@@ -31,8 +26,17 @@ const Customer = () => {
     }
   };
 
-  useEffect(() => {
-    getAllUsers();
+  useEffect(() => { 
+    async function getUsers() {
+      try {
+        const res = await axios.get("http://localhost:1406/admin/manage");
+        console.log(res.data)
+        setUsers(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  getUsers();
   }, []);
 
   return (
