@@ -1,3 +1,5 @@
+// Trong component Products.js
+
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
@@ -8,6 +10,8 @@ import "./css/Products.css";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null); // Thêm state để lưu sản phẩm đang được chọn
+  const [showEditModal, setShowEditModal] = useState(false); // State để kiểm soát việc hiển thị form hoặc modal sửa sản phẩm
   const pageSize = 10;
 
   // Function to get products for a specific page
@@ -53,6 +57,32 @@ const Products = () => {
     }
   };
 
+  // Function to handle product update
+  const updateProduct = async () => {
+    try {
+      const res = await axios.put(
+        "http://localhost:1406/admin/update-product",
+        selectedProduct
+      );
+      console.log(res.data);
+      toast.success("Product updated successfully!");
+      // Gọi lại API để lấy danh sách sản phẩm sau khi cập nhật
+      getProductsByPage(currentPage);
+      // Đóng form hoặc modal
+      setShowEditModal(false);
+    } catch (error) {
+      console.error(error);
+      toast.error("Error updating product");
+    }
+  };
+
+  // Function to handle selecting a product for update
+  const selectProductForUpdate = (product) => {
+    setSelectedProduct(product);
+    // Mở form hoặc modal
+    setShowEditModal(true);
+  };
+
   useEffect(() => {
     getProductsByPage(currentPage);
   }, [currentPage]);
@@ -64,10 +94,11 @@ const Products = () => {
         <div className="dashboard-container">
           <h1 className="dashboard-heading">Quản lý Sản phẩm</h1>
           {products.length > 0 && (
-            <div>
+            <div className="product-table-wrapper">
               <table className="product-table">
                 <thead>
                   <tr>
+                    <th>image</th>
                     <th>Name</th>
                     <th>Category</th>
                     <th>Price</th>
@@ -77,6 +108,13 @@ const Products = () => {
                 <tbody>
                   {products.map((product) => (
                     <tr key={product.id} className="product-item">
+                      <td>
+                        <img
+                          src={product.imageUrl}
+                          alt={product.name}
+                          className="product-image"
+                        />
+                      </td>
                       <td>{product.name}</td>
                       <td>{product.category}</td>
                       <td>{product.newPrice}</td>
@@ -94,6 +132,12 @@ const Products = () => {
                           }}
                         >
                           Delete
+                        </button>
+                        <button
+                          className="update-btn"
+                          onClick={() => selectProductForUpdate(product)}
+                        >
+                          Update
                         </button>
                       </td>
                     </tr>
@@ -129,6 +173,165 @@ const Products = () => {
         autoClose={3000}
         hideProgressBar
       />
+      {showEditModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowEditModal(false)}>
+              &times;
+            </span>
+            <h2>Edit Product</h2>
+            <form>
+              {/* Thêm các trường nhập liệu cho việc cập nhật sản phẩm */}
+              <label>Tên sản phẩm</label>
+              <input
+                type="text"
+                value={selectedProduct.name}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    name: e.target.value,
+                  })
+                }
+              />
+              <label>Nhãn hàng</label>
+              <input
+                type="text"
+                value={selectedProduct.category}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    category: e.target.value,
+                  })
+                }
+              />
+
+              <label>Thông số màn hình</label>
+              <input
+                type="text"
+                value={selectedProduct.screen}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    screen: e.target.value,
+                  })
+                }
+              />
+
+              <label>Giá</label>
+              <input
+                type="number"
+                value={selectedProduct.newPrice}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    newPrice: e.target.value,
+                  })
+                }
+              />
+
+              <label>Chip</label>
+              <input
+                type="text"
+                value={selectedProduct.chip}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    chip: e.target.value,
+                  })
+                }
+              />
+
+              <label>Camera trước</label>
+              <input
+                type="text"
+                value={selectedProduct.selfieCam}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    selfieCam: e.target.value,
+                  })
+                }
+              />
+
+              <label>Camera sau</label>
+              <input
+                type="text"
+                value={selectedProduct.behindCam}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    behindCam: e.target.value,
+                  })
+                }
+              />
+
+              <label>Ram</label>
+              <input
+                type="text"
+                value={selectedProduct.ram}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    ram: e.target.value,
+                  })
+                }
+              />
+
+              <label>Bộ nhớ trong</label>
+              <input
+                type="text"
+                value={selectedProduct.rom}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    rom: e.target.value,
+                  })
+                }
+              />
+
+              <label>Pin</label>
+              <input
+                type="text"
+                value={selectedProduct.pin}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    pin: e.target.value,
+                  })
+                }
+              />
+
+              <label>Tốc độ sạc</label>
+              <input
+                type="text"
+                value={selectedProduct.chargeSpeed}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    chargeSpeed: e.target.value,
+                  })
+                }
+              />
+
+              <label>Số lượng trong kho</label>
+              <input
+                type="text"
+                value={selectedProduct.quantity}
+                onChange={(e) =>
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    quantity: e.target.value,
+                  })
+                }
+              />
+
+              <button type="button" onClick={updateProduct}>
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
