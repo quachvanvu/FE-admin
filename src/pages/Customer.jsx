@@ -3,7 +3,6 @@ import "./css/Customer.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
-import "../App.css";
 
 const Customer = () => {
   const [users, setUsers] = useState([]);
@@ -36,43 +35,38 @@ const Customer = () => {
   }, []);
 
   return (
-    <div className="App">
-      <div className="AppGlass">
-        <Sidebar />
-        <div className="dashboard-container">
-          <h1 className="dashboard-heading">Manage Users</h1>
-          <table className="user-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map(
-                (user) =>
-                  user.role === "user" && (
-                    <tr key={user.id} className="user-item">
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.role}</td>
-                      <td>
-                        <button
-                          className="delete-btn"
-                          onClick={() => deleteUser(user.id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  )
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div className="dashboard-container">
+      <h1 className="dashboard-heading">Manage Users</h1>
+      <table className="user-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(
+            (user) =>
+              user.role === "user" && (
+                <tr key={user.id} className="user-item">
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteUser(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              )
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

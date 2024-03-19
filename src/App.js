@@ -4,6 +4,8 @@ import Dashboard from "./pages/Dashboard";
 import Customer from "./pages/Customer";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
+import ParentComponent from "./components/ParentComponent/ParentComponent.jsx";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -11,12 +13,33 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/customers" element={<Customer />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/orders" element={<Orders />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ParentComponent sidebar={true} childComponent={<Dashboard />} />
+            }
+          />
+          <Route
+            path="/customers"
+            element={
+              <ParentComponent sidebar={true} childComponent={<Customer />} />
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <ParentComponent sidebar={true} childComponent={<Products />} />
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ParentComponent sidebar={true} childComponent={<Orders />} />
+            }
+          />
         </Routes>
       </BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );
 }

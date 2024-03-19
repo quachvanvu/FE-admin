@@ -1,7 +1,6 @@
 // Trong component Products.js
 
 import React, { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,8 +9,8 @@ import "./css/Products.css";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedProduct, setSelectedProduct] = useState(null); // Thêm state để lưu sản phẩm đang được chọn
-  const [showEditModal, setShowEditModal] = useState(false); // State để kiểm soát việc hiển thị form hoặc modal sửa sản phẩm
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
   const pageSize = 10;
 
   // Function to get products for a specific page
@@ -98,11 +97,11 @@ const Products = () => {
               <table className="product-table">
                 <thead>
                   <tr>
-                    <th style={{ width: "10%" }}>image</th>
-                    <th style={{ width: "30%" }}>Name</th>
-                    <th style={{ width: "15%" }}>Category</th>
-                    <th style={{ width: "15%" }}>Price</th>
-                    <th style={{ width: "15%" }}>Action</th>
+                    <th>image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -332,7 +331,7 @@ const Products = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
