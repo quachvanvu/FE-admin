@@ -98,11 +98,11 @@ const Products = () => {
               <table className="product-table">
                 <thead>
                   <tr>
-                    <th>image</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Action</th>
+                    <th style={{ width: "10%" }}>image</th>
+                    <th style={{ width: "30%" }}>Name</th>
+                    <th style={{ width: "15%" }}>Category</th>
+                    <th style={{ width: "15%" }}>Price</th>
+                    <th style={{ width: "15%" }}>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -219,7 +219,7 @@ const Products = () => {
 
               <label>Giá</label>
               <input
-                type="number"
+                type="text"
                 value={selectedProduct.newPrice}
                 onChange={(e) =>
                   setSelectedProduct({
