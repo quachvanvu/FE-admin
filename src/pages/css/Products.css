@@ -1,4 +1,7 @@
 /* ./css/Products.css */
+.dashboard-container {
+  /* flex: 1; */
+}
 
 .product-table {
   width: 100%;
@@ -50,7 +53,7 @@
 }
 
 .pagination button {
-  background-color: #4caf50;
+  background-color: #2b892f;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -59,25 +62,27 @@
 }
 
 .pagination button:hover {
-  background-color: #054308;
+  background-color: #3bc43f;
 }
 
 .pagination button.active {
-  background-color: #054308;
+  background-color: #3bc43f;
+  padding: 8px 16px 8px 8px;
 }
 
 /* CSS cho nút Update */
 .update-btn {
-  background-color: #4caf50;
+  background-color: #2b892f;
   color: #fff;
   padding: 8px 12px;
   border: none;
   cursor: pointer;
-  margin-right: 5px;
+  margin-right: 8px;
+  margin-left: 27px;
 }
 
 .update-btn:hover {
-  background-color: #054308;
+  background-color: #3bc43f;
 }
 
 /* CSS cho modal */
