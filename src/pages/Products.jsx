@@ -1,5 +1,3 @@
-// Trong component Products.js
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -87,91 +85,81 @@ const Products = () => {
   }, [currentPage]);
 
   return (
-    <div className="App">
-      <div className="AppGlass">
-        <Sidebar />
-        <div className="dashboard-container">
-          <h1 className="dashboard-heading">Quản lý Sản phẩm</h1>
-          {products.length > 0 && (
-            <div className="product-table-wrapper">
-              <table className="product-table">
-                <thead>
-                  <tr>
-                    <th>image</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Action</th>
+    <>
+      <div className="dashboard-container">
+        <h1 className="dashboard-heading">Quản lý Sản phẩm</h1>
+        {products.length > 0 && (
+          <div className="product-table-wrapper">
+            <table className="product-table">
+              <thead>
+                <tr>
+                  <th style={{ width: "10%" }}>image</th>
+                  <th style={{ width: "30%" }}>Name</th>
+                  <th style={{ width: "15%" }}>Category</th>
+                  <th style={{ width: "15%" }}>Price</th>
+                  <th style={{ width: "15%" }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id} className="product-item">
+                    <td>
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="product-image"
+                      />
+                    </td>
+                    <td>{product.name}</td>
+                    <td>{product.category}</td>
+                    <td>{product.newPrice}</td>
+                    <td className="btn">
+                      <button
+                        className="update-btn"
+                        onClick={() => selectProductForUpdate(product)}
+                      >
+                        Update
+                      </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Are you sure you want to delete this product?"
+                            )
+                          ) {
+                            deleteProduct(product.id);
+                          }
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {products.map((product) => (
-                    <tr key={product.id} className="product-item">
-                      <td>
-                        <img
-                          src={product.imageUrl}
-                          alt={product.name}
-                          className="product-image"
-                        />
-                      </td>
-                      <td>{product.name}</td>
-                      <td>{product.category}</td>
-                      <td>{product.newPrice}</td>
-                      <td>
-                        <button
-                          className="delete-btn"
-                          onClick={() => {
-                            if (
-                              window.confirm(
-                                "Are you sure you want to delete this product?"
-                              )
-                            ) {
-                              deleteProduct(product.id);
-                            }
-                          }}
-                        >
-                          Delete
-                        </button>
-                        <button
-                          className="update-btn"
-                          onClick={() => selectProductForUpdate(product)}
-                        >
-                          Update
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="pagination">
-                <button
-                  onClick={handlePreviousPage}
-                  disabled={currentPage === 0}
-                >
-                  Previous
-                </button>
-                {[...Array(5)].map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentPage(index)}
-                    className={index === currentPage ? "active" : ""}
-                  >
-                    {index}
-                  </button>
                 ))}
-                <button onClick={handleNextPage} disabled={currentPage === 4}>
-                  Next
+              </tbody>
+            </table>
+            <div className="pagination">
+              <button onClick={handlePreviousPage} disabled={currentPage === 0}>
+                Previous
+              </button>
+              {[...Array(5)].map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index)}
+                  className={index === currentPage ? "active" : ""}
+                >
+                  {index}
                 </button>
-              </div>
+              ))}
+              <button onClick={handleNextPage} disabled={currentPage === 4}>
+                Next
+              </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
-        hideProgressBar
-      />
+
       {showEditModal && (
         <div className="modal">
           <div className="modal-content">
@@ -218,7 +206,7 @@ const Products = () => {
 
               <label>Giá</label>
               <input
-                type="text"
+                type="number"
                 value={selectedProduct.newPrice}
                 onChange={(e) =>
                   setSelectedProduct({

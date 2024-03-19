@@ -25,7 +25,7 @@ const Login = () => {
       if (response.status === 200) {
         console.log("Đăng nhập thành công:", response.data);
 
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error(
