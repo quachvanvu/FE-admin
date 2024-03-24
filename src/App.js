@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Customer from "./pages/Customer";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
+import AddProduct from "./pages/addProduct.jsx";
 import ParentComponent from "./components/ParentComponent/ParentComponent.jsx";
 import { ToastContainer } from "react-toastify";
 
@@ -35,6 +36,12 @@ function App() {
             path="/orders"
             element={
               <ParentComponent sidebar={true} childComponent={<Orders />} />
+            }
+          />
+          <Route
+            path="addProduct"
+            element={
+              <ParentComponent sidebar={true} childComponent={<AddProduct />} />
             }
           />
         </Routes>

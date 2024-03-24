@@ -1,8 +1,6 @@
 /* ./css/Products.css */
-.dashboard-container {
-  /* flex: 1; */
-}
 
+/* css table */
 .product-table {
   width: 100%;
   border-collapse: collapse;
@@ -70,6 +68,26 @@
   padding: 8px 16px 8px 8px;
 }
 
+/* CSS nút add product*/
+.dashboard-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-product-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-product-button:hover {
+  background-color: #0056b3;
+}
+
 /* CSS cho nút Update */
 .update-btn {
   background-color: #2b892f;
@@ -99,12 +117,13 @@
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* Canh giữa modal */
+  background: var(--yellow);
+  margin: 7% auto; /* Canh giữa modal */
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   width: 80%;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .close {

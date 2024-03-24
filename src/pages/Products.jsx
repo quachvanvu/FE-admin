@@ -1,17 +1,16 @@
-// Trong component Products.js
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/Products.css";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const pageSize = 10;
+  const navigate = useNavigate();
 
   // Function to get products for a specific page
   const getProductsByPage = async (page) => {
@@ -40,9 +39,14 @@ const Products = () => {
     }
   };
 
+  //Function to handle addProduct
+  const handleAddProduct = () => {
+    navigate("/addProduct");
+  };
+
   // Function to handle next page
   const handleNextPage = () => {
-    if (currentPage < 4) {
+    if (currentPage < 5) {
       setCurrentPage(currentPage + 1);
       getProductsByPage(currentPage + 1);
     }
@@ -89,7 +93,13 @@ const Products = () => {
   return (
     <>
       <div className="dashboard-container">
-        <h1 className="dashboard-heading">Quản lý Sản phẩm</h1>
+        <div className="dashboard-heading-container">
+          <h1 className="dashboard-heading">Quản lý Sản phẩm</h1>
+          <button className="add-product-button" onClick={handleAddProduct}>
+            Add Product
+          </button>
+        </div>
+
         {products.length > 0 && (
           <div className="product-table-wrapper">
             <table className="product-table">
@@ -145,7 +155,7 @@ const Products = () => {
               <button onClick={handlePreviousPage} disabled={currentPage === 0}>
                 Previous
               </button>
-              {[...Array(5)].map((_, index) => (
+              {[...Array(6)].map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentPage(index)}
@@ -154,7 +164,7 @@ const Products = () => {
                   {index}
                 </button>
               ))}
-              <button onClick={handleNextPage} disabled={currentPage === 4}>
+              <button onClick={handleNextPage} disabled={currentPage === 5}>
                 Next
               </button>
             </div>

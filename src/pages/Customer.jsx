@@ -2,7 +2,8 @@ import React from "react";
 import "./css/Customer.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "../components/Sidebar";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Customer = () => {
   const [users, setUsers] = useState([]);
@@ -25,6 +26,7 @@ const Customer = () => {
       );
       console.log(res.data);
       setUsers(users.filter((user) => user.id !== userId));
+      toast.success("User deleted successfully!");
     } catch (error) {
       console.error(error);
     }
