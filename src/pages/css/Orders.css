@@ -1,3 +1,55 @@
-.container {
-  flex: 1;
+/* CSS cho bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* CSS cho tiêu đề trạng thái */
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* CSS cho phần tử bao bảng */
+.order-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* CSS cho mỗi bảng */
+.order-table {
+  flex: 1 1 30%;
+  margin-right: 20px;
+}
+/* css buton  */
+
+.confirm-button,
+.cancelled-button {
+  background-color: #4caf50; /* Màu nền */
+  color: white; /* Màu chữ */
+  padding: 10px 20px; /* Kích thước padding */
+  border: none; /* Không có viền */
+  border-radius: 4px; /* Bo góc */
+  cursor: pointer; /* Con trỏ khi di chuột vào */
+}
+
+.cancelled-button {
+  margin-left: 10px;
+  background-color: #ff5858;
+}
+
+.confirm-button:hover {
+  background-color: #45a049; /* Màu nền khi di chuột vào */
 }

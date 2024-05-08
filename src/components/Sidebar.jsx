@@ -45,9 +45,7 @@ const Sidebar = () => {
         {/* logo */}
         <div className="logo">
           <img src={Logo} alt="logo" />
-          <span>
-            Sh<span>o</span>ps
-          </span>
+          <span>Admin</span>
         </div>
 
         <div className="menu">

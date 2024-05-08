@@ -124,7 +124,11 @@ const Products = () => {
                     </td>
                     <td>{product.name}</td>
                     <td>{product.category}</td>
-                    <td>{product.newPrice}</td>
+                    <td>
+                      {product.newPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"}
+                    </td>
                     <td className="btn">
                       <button
                         className="update-btn"

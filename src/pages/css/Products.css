@@ -14,7 +14,7 @@
 .product-table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
+  text-align: center;
   width: auto;
   word-wrap: break-word;
 }

@@ -1,3 +1,46 @@
-.container {
-  flex: 1;
+.order-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.order-box,
+.order-box1 {
+  width: 300px;
+  height: 200px;
+  background-color: #7e57c2; /* Màu của ô vuông */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.order-box {
+  top: 30px; /* Khoảng cách từ trên xuống */
+  left: 220px; /* Khoảng cách từ trái sang */
+}
+
+.order-box1 {
+  top: 30px; /* Khoảng cách từ trên xuống */
+  left: 700px; /* Đặt giữa trang */
+}
+
+.order-number,
+.amount-number {
+  font-size: 36px;
+  color: #fff; /* Màu của số */
+}
+
+.order-label,
+.amount-label {
+  font-size: 18px;
+  color: #fff; /* Màu của nhãn */
+  margin: 20px;
+}
+
+#monthlyChart {
+  width: 70%;
+  margin: 245px auto; /* Canh giữa và tạo khoảng cách với các box */
 }
