@@ -44,3 +44,39 @@
   width: 70%;
   margin: 245px auto; /* Canh giữa và tạo khoảng cách với các box */
 }
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .order-box {
+    left: 64px;
+    width: 240px;
+    height: 164px;
+  }
+
+  .order-box1 {
+    left: 460px;
+    width: 240px;
+    height: 164px;
+  }
+
+  #monthlyChart {
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .order-box {
+    left: 2px;
+    width: 200px;
+    height: 130px;
+  }
+
+  .order-box1 {
+    left: 208px;
+    width: 200px;
+    height: 130px;
+  }
+
+  #monthlyChart {
+    width: 100%;
+  }
+}
