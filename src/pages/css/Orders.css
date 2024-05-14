@@ -13,7 +13,11 @@ td {
 }
 
 th {
+  margin-top: -5px;
   background-color: #f2f2f2;
+  position: sticky; /* Cố định phần thead */
+  top: -1px;
+  z-index: 1;
 }
 
 /* CSS cho tiêu đề trạng thái */
@@ -33,8 +37,14 @@ h2 {
   flex: 1 1 30%;
   margin-right: 20px;
 }
-/* css buton  */
 
+/* CSS cho wrapper của bảng để thêm cuộn dọc */
+.table-wrapper {
+  max-height: 550px; /* Chiều cao tối đa của bảng */
+  overflow-y: auto; /* Thêm cuộn dọc nếu vượt quá chiều cao tối đa */
+}
+
+/* CSS cho nút bấm */
 .confirm-button,
 .cancelled-button {
   background-color: #4caf50; /* Màu nền */
@@ -52,4 +62,8 @@ h2 {
 
 .confirm-button:hover {
   background-color: #45a049; /* Màu nền khi di chuột vào */
+}
+
+.cancelled-button:hover {
+  background-color: #e60000; /* Màu nền khi di chuột vào */
 }

@@ -39,15 +39,23 @@ const Orders = () => {
   }, []);
 
   const handleCancelled = async (orderId) => {
+    const isConfirmed = window.confirm("Bạn có chắc muốn hủy đơn hàng này?");
+
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       await axios.put(`${process.env.REACT_APP_API_URL}/admin/order-status`, {
         orderId,
         status: "cancelled",
       });
       await fetchAllOrders();
-      alert("Có chắc muốn hủy đơn này");
-      toast.success("successfully!");
-    } catch (error) {}
+      toast.success("Order cancelled successfully!");
+    } catch (error) {
+      console.error("Failed to cancel order:", error);
+      toast.error("Failed to cancel order.");
+    }
   };
 
   const updateOrderStatus = async (orderId, status) => {
@@ -81,53 +89,55 @@ const Orders = () => {
   const renderTable = () => (
     <div className="order-table">
       <h2>All Orders</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Total Amount</th>
-            <th>Provider</th>
-            <th>Payment Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ordersByStatus.pending.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.name}</td>
-              <td>{formatDateTime(order.created_at)}</td>
-              <td>
-                {order.total_amount
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"}
-              </td>
-              <td>{order.provider}</td>
-              <td>{order.payment_status}</td>
-              <td>
-                {order.payment_status === "pending" && (
-                  <>
-                    <button
-                      className="confirm-button"
-                      onClick={() => updateOrderStatus(order.id, "completed")}
-                    >
-                      Confirm
-                    </button>
-                    <button
-                      className="cancelled-button"
-                      onClick={() => handleCancelled(order.id)}
-                    >
-                      Cancelled
-                    </button>
-                  </>
-                )}
-              </td>
+      <div className="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Total Amount</th>
+              <th>Provider</th>
+              <th>Payment Status</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {ordersByStatus.pending.map((order) => (
+              <tr key={order.id}>
+                <td>{order.id}</td>
+                <td>{order.name}</td>
+                <td>{formatDateTime(order.created_at)}</td>
+                <td>
+                  {order.total_amount
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"}
+                </td>
+                <td>{order.provider}</td>
+                <td>{order.payment_status}</td>
+                <td>
+                  {order.payment_status === "pending" && (
+                    <>
+                      <button
+                        className="confirm-button"
+                        onClick={() => updateOrderStatus(order.id, "completed")}
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        className="cancelled-button"
+                        onClick={() => handleCancelled(order.id)}
+                      >
+                        Cancelled
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 

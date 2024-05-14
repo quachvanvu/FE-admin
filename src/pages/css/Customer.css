@@ -33,6 +33,28 @@
   cursor: pointer;
 }
 
+/* CSS cho bảng */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  margin-top: -5px;
+  background-color: #f2f2f2;
+  position: sticky; /* Cố định phần thead */
+  top: -1px;
+  z-index: 1;
+}
+
 @media (max-width: 768px) {
   .user-table th,
   .user-table td {
