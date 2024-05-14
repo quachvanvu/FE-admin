@@ -11,7 +11,9 @@ const Customer = () => {
   // Function to get all users
   const getAllUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:1406/admin/manage");
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/manage`
+      );
       setUsers(res.data);
     } catch (error) {
       console.error(error);
@@ -22,10 +24,11 @@ const Customer = () => {
   const deleteUser = async (userId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:1406/admin/manage/:${userId}`
+        `${process.env.REACT_APP_API_URL}/admin/manage/:${userId}`
       );
       console.log(res.data);
       setUsers(users.filter((user) => user.id !== userId));
+      alert("Có chắc muốn xóa người dùng này");
       toast.success("User deleted successfully!");
     } catch (error) {
       console.error(error);

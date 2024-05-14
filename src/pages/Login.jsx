@@ -17,10 +17,13 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:1406/admin/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/admin/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         console.log("Đăng nhập thành công:", response.data);
@@ -42,12 +45,15 @@ const Login = () => {
         <h1>Đăng nhập</h1>
         <div className="login-form">
           <input
+            name="email"
             type="text"
             placeholder="Email của bạn"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
+            autoComplete="current-password"
+            name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Mật khẩu"
             value={password}

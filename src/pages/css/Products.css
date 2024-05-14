@@ -166,58 +166,26 @@ button[type="button"]:hover {
   background-color: #357ae8;
 }
 
-/* Tablet landscape */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .dashboard-container {
-    padding: 20px;
-  }
-}
-
-/* Tablet portrait */
-@media screen and (min-width: 481px) and (max-width: 767px) {
-  .dashboard-container {
-    padding: 20px;
-  }
-
-  .product-table th,
-  .product-table td {
-    font-size: 14px;
-    padding: 6px;
-  }
-}
-
-/* Mobile landscape */
-@media screen and (min-width: 320px) and (max-width: 480px) {
-  .dashboard-container {
-    padding: 10px;
-  }
-
-  .product-table th,
-  .product-table td {
-    font-size: 12px;
-    padding: 4px;
+    width: 90%;
   }
 
   .pagination button {
-    padding: 6px 10px;
     margin: 0 2px;
   }
 }
 
-/* Mobile portrait */
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 320px) and (max-width: 767px) {
   .dashboard-container {
-    padding: 10px;
-  }
-
-  .product-table th,
-  .product-table td {
-    font-size: 12px;
-    padding: 4px;
+    width: 64%;
   }
 
   .pagination button {
-    padding: 6px 10px;
-    margin: 0 2px;
+    margin: 0 1px;
+  }
+
+  .pagination button {
+    padding: 8px 10px;
   }
 }
