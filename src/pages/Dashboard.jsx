@@ -12,7 +12,7 @@ const Dashboard = () => {
     const fetchOrders = async () => {
       try {
         const ordersResponse = await axios.get(
-          "http://localhost:1406/admin/order-status?status=completed"
+          `${process.env.REACT_APP_API_URL}/admin/order-status?status=completed`
         );
         if (ordersResponse.data && ordersResponse.data.length > 0) {
           setTotalOrders(ordersResponse.data.length);
@@ -25,7 +25,7 @@ const Dashboard = () => {
     const fetchTotalAmount = async () => {
       try {
         const totalAmountResponse = await axios.get(
-          "http://localhost:1406/admin/total-amount"
+          `${process.env.REACT_APP_API_URL}/admin/total-amount`
         );
         if (totalAmountResponse.data && totalAmountResponse.data.length > 0) {
           let totalAmountSum = 0;
@@ -48,7 +48,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1406/admin/total-per-month"
+          `${process.env.REACT_APP_API_URL}/admin/total-per-month`
         );
         setMonthlyData(response.data);
         renderChart(response.data);

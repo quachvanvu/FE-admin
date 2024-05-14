@@ -16,7 +16,7 @@ const Products = () => {
   const getProductsByPage = async (page) => {
     try {
       const res = await axios.get(
-        `http://localhost:1406/admin/products?page=${page}`
+        `${process.env.REACT_APP_API_URL}/admin/products?page=${page}`
       );
       setProducts(res.data.products);
     } catch (error) {
@@ -28,7 +28,7 @@ const Products = () => {
   const deleteProduct = async (productId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:1406/admin/delete-product/:${productId}`
+        `${process.env.REACT_APP_API_URL}/admin/delete-product/:${productId}`
       );
       console.log(res.data);
       setProducts(products.filter((product) => product.id !== productId));
@@ -64,7 +64,7 @@ const Products = () => {
   const updateProduct = async () => {
     try {
       const res = await axios.put(
-        "http://localhost:1406/admin/update-product",
+        `${process.env.REACT_APP_API_URL}/admin/update-product`,
         selectedProduct
       );
       console.log(res.data);

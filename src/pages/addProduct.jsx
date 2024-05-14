@@ -38,7 +38,7 @@ const AddProduct = () => {
     const data = Object.fromEntries(formData);
 
     await axios
-      .post("http://localhost:1406/admin/new-product", data, {
+      .post(`${process.env.REACT_APP_API_URL}/admin/new-product`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

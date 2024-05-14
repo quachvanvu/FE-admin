@@ -13,7 +13,7 @@ const Orders = () => {
   const fetchOrdersByStatus = async (status) => {
     try {
       const response = await axios.get(
-        `http://localhost:1406/admin/order-status?status=${status}`
+        `${process.env.REACT_APP_API_URL}/admin/order-status?status=${status}`
       );
       return response.data;
     } catch (error) {
@@ -40,7 +40,7 @@ const Orders = () => {
 
   const handleCancelled = async (orderId) => {
     try {
-      await axios.put("http://localhost:1406/admin/order-status", {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/order-status`, {
         orderId,
         status: "cancelled",
       });
@@ -50,7 +50,7 @@ const Orders = () => {
 
   const updateOrderStatus = async (orderId, status) => {
     try {
-      await axios.put("http://localhost:1406/admin/order-status", {
+      await axios.put(`${process.env.REACT_APP_API_URL}/admin/order-status`, {
         orderId,
         status,
       });
