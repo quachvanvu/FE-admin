@@ -52,6 +52,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
+            autoComplete="current-password"
             name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Mật khẩu"

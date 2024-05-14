@@ -14,6 +14,7 @@ const Dashboard = () => {
         const ordersResponse = await axios.get(
           `${process.env.REACT_APP_API_URL}/admin/order-status?status=completed`
         );
+        console.log(ordersResponse);
         if (ordersResponse.data && ordersResponse.data.length > 0) {
           setTotalOrders(ordersResponse.data.length);
         }

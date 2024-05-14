@@ -45,6 +45,8 @@ const Orders = () => {
         status: "cancelled",
       });
       await fetchAllOrders();
+      alert("Có chắc muốn hủy đơn này");
+      toast.success("successfully!");
     } catch (error) {}
   };
 

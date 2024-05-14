@@ -28,6 +28,7 @@ const Customer = () => {
       );
       console.log(res.data);
       setUsers(users.filter((user) => user.id !== userId));
+      alert("Có chắc muốn xóa người dùng này");
       toast.success("User deleted successfully!");
     } catch (error) {
       console.error(error);
