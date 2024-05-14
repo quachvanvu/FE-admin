@@ -63,6 +63,7 @@ const Dashboard = () => {
   const renderChart = (data) => {
     const labels = data[0].map((item) => `${item.month}/${item.year}`);
     const totalOrders = data[0].map((item) => item.total_orders);
+    console.log(totalOrders);
     const totalAmounts = data[0].map((item) => parseFloat(item.total_amount));
 
     const ctx = document.getElementById("monthlyChart");
