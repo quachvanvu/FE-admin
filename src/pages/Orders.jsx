@@ -24,13 +24,13 @@ const Orders = () => {
 
   const fetchAllOrders = async () => {
     const pending = await fetchOrdersByStatus("pending");
-    // const completed = await fetchOrdersByStatus("completed");
-    // const cancelled = await fetchOrdersByStatus("cancelled");
+    const completed = await fetchOrdersByStatus("completed");
+    const cancelled = await fetchOrdersByStatus("cancelled");
 
     setOrdersByStatus({
       pending: pending,
-      // completed: completed,
-      // cancelled: cancelled,
+      completed: completed,
+      cancelled: cancelled,
     });
   };
 
@@ -68,7 +68,8 @@ const Orders = () => {
       const updatedPendingOrders = ordersByStatus.pending.filter(
         (order) => order.id !== orderId
       );
-      toast.success("Xác nhận đơn hàng thành công");
+      await fetchAllOrders();
+      toast.success("Order confirmed successfully!");
       setOrdersByStatus((prevState) => ({
         ...prevState,
         pending: updatedPendingOrders,
@@ -85,6 +86,43 @@ const Orders = () => {
     const year = date.getFullYear();
     return ` ${day}-${month}-${year}`;
   }
+
+  const renderOrders = (orders, status) => (
+    <>
+      {orders.map((order) => (
+        <tr key={order.id}>
+          <td>{order.id}</td>
+          <td>{order.name}</td>
+          <td>{formatDateTime(order.created_at)}</td>
+          <td>
+            {order.total_amount
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"}
+          </td>
+          <td>{order.provider}</td>
+          <td>{order.payment_status}</td>
+          <td>
+            {status === "pending" && order.payment_status === "pending" && (
+              <>
+                <button
+                  className="confirm-button"
+                  onClick={() => updateOrderStatus(order.id, "completed")}
+                >
+                  Confirm
+                </button>
+                <button
+                  className="cancelled-button"
+                  onClick={() => handleCancelled(order.id)}
+                >
+                  Cancelled
+                </button>
+              </>
+            )}
+          </td>
+        </tr>
+      ))}
+    </>
+  );
 
   const renderTable = () => (
     <div className="order-table">
@@ -103,38 +141,9 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {ordersByStatus.pending.map((order) => (
-              <tr key={order.id}>
-                <td>{order.id}</td>
-                <td>{order.name}</td>
-                <td>{formatDateTime(order.created_at)}</td>
-                <td>
-                  {order.total_amount
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"}
-                </td>
-                <td>{order.provider}</td>
-                <td>{order.payment_status}</td>
-                <td>
-                  {order.payment_status === "pending" && (
-                    <>
-                      <button
-                        className="confirm-button"
-                        onClick={() => updateOrderStatus(order.id, "completed")}
-                      >
-                        Confirm
-                      </button>
-                      <button
-                        className="cancelled-button"
-                        onClick={() => handleCancelled(order.id)}
-                      >
-                        Cancelled
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {renderOrders(ordersByStatus.pending, "pending")}
+            {renderOrders(ordersByStatus.completed, "completed")}
+            {renderOrders(ordersByStatus.cancelled, "cancelled")}
           </tbody>
         </table>
       </div>
